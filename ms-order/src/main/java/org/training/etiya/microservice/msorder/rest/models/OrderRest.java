@@ -1,5 +1,7 @@
 package org.training.etiya.microservice.msorder.rest.models;
 
+import org.training.etiya.microservice.msorder.validation.Startwith;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -12,9 +14,11 @@ public class OrderRest {
     @NotEmpty
     @NotBlank
     @Size(min = 2,max = 15,message = "İsim {min} ile {max} arasında olmalı")
+    // @Startwith(value = "n:",message = "customerName {value} ile başlamalı")
     private String customerName;
     @NotEmpty
     @Size(min = 2,max = 15,message = "İsim {min} ile {max} arasında olmalı")
+    // @Startwith("p:")
     private String customerNumber;
     @Size(min = 1)
     @Valid
