@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -30,6 +32,7 @@ public class RestaurantIntegration {
     @Autowired
     private IRestaurantIntg restaurantIntg;
 
+    @Retry(name = "restaurant_retry", fallbackMethod = "calculateOrderFallback")
     public PriceInfo calculateOrder(Order order) {
         try {
             return restTemplate.postForObject("http://API-RESTAURANT/api/v1/restaurant/menu/calculate/price",
@@ -47,11 +50,19 @@ public class RestaurantIntegration {
         }
         return new PriceInfo();
     }
+    public PriceInfo calculateOrderFallback(Order order,Throwable th) {
+        return new PriceInfo();
+    }
 
+
+    @Retry(name = "restaurant_retry", fallbackMethod = "calculateOrderFallback")
+    @CircuitBreaker(name = "restaurant_cb",fallbackMethod = "calculateOrder3Fallback")
     public PriceInfo calculateOrder3(Order order) {
         return restaurantIntg.calculatePrice(IOrderMapping.ordermapper.toOrderRest(order));
     }
-
+    public PriceInfo calculateOrder3Fallback(Order order,Throwable th) {
+        return new PriceInfo();
+    }
     private AtomicInteger count = new AtomicInteger();
 
     public PriceInfo calculateOrder2(Order order) {
