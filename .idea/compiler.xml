@@ -7,11 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ms-restaurant" />
-        <module name="node-configuration" />
+        <module name="ms-notification" />
         <module name="ms-customer" />
+        <module name="api-restaurant" />
+        <module name="lib-rest-error" />
+        <module name="node-configuration" />
+        <module name="ms-customer-api" />
         <module name="spring-demo" />
         <module name="node-discovery" />
-        <module name="lib-rest-error" />
       </profile>
       <profile name="Annotation profile for etiya-ms" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -27,8 +30,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-restaurant" options="-parameters" />
       <module name="lib-rest-error" options="-parameters" />
       <module name="ms-customer" options="-parameters" />
+      <module name="ms-customer-api" options="-parameters" />
+      <module name="ms-notification" options="-parameters" />
       <module name="ms-order" options="-parameters" />
       <module name="ms-restaurant" options="-parameters" />
       <module name="node-configuration" options="-parameters" />

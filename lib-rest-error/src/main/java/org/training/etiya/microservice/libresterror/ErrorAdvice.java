@@ -70,4 +70,13 @@ public class ErrorAdvice {
                                                     .setDesc("Internal error : " + exception.getMessage()));
     }
 
+    @ExceptionHandler(RestFeignException.class)
+    public ResponseEntity<ErrorObj> handle(RestFeignException exception) {
+        return ResponseEntity.status(exception.getStatus())
+                             .body(createBaseError().setDesc("diğer microservice de problem")
+                                                    .setErrorCode(3000)
+                                                    .add(exception.getErrorObj()));
+    }
+
+
 }

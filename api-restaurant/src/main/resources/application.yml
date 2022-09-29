@@ -1,0 +1,15 @@
+spring:
+  config:
+    import: configserver:http://127.0.0.1:8888
+  application:
+    name: api-restaurant
+  cloud:
+    gateway:
+      routes:
+        - id: restaurant
+          uri: lb://RESTAURANT
+          predicates:
+            - Path=/api/v1/restaurant/**
+server:
+  port: ${PORT:8070}
+

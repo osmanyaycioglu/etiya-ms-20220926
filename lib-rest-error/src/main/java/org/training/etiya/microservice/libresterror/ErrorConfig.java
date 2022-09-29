@@ -11,4 +11,8 @@ public class ErrorConfig {
         return new ErrorAdvice();
     }
 
+    @Bean
+    public MyFeignErrorDecoder myFeignErrorDecoder(){
+        return new MyFeignErrorDecoder();
+    }
 }

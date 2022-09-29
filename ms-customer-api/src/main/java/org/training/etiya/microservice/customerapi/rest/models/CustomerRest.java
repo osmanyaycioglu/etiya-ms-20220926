@@ -1,4 +1,4 @@
-package org.training.etiya.microservice.customer.rest.models;
+package org.training.etiya.microservice.customerapi.rest.models;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -40,5 +40,14 @@ public class CustomerRest {
         return new CustomerRest().setName("customer" + random.nextInt())
                                  .setSurname("sur" + random.nextInt())
                                  .setPhoneNumber("" + random.nextInt());
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerRest{" +
+                "phoneNumber='" + phoneNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }

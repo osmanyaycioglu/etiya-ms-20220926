@@ -5,6 +5,15 @@ public class PriceInfo {
     private Double totalPrice;
     private String desc;
 
+    public PriceInfo() {
+    }
+
+    public PriceInfo(Double totalPrice,
+                     String desc) {
+        this.totalPrice = totalPrice;
+        this.desc = desc;
+    }
+
     public Double getTotalPrice() {
         return totalPrice;
     }

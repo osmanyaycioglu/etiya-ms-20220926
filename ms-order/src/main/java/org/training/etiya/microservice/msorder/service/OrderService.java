@@ -2,7 +2,9 @@ package org.training.etiya.microservice.msorder.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.training.etiya.microservice.customerapi.rest.models.CustomerRest;
 import org.training.etiya.microservice.msorder.db.OrderDbOperations;
+import org.training.etiya.microservice.msorder.integrations.customer.CustomerIntegration;
 import org.training.etiya.microservice.msorder.integrations.restaurant.RestaurantIntegration;
 import org.training.etiya.microservice.msorder.integrations.restaurant.models.PriceInfo;
 import org.training.etiya.microservice.msorder.service.models.Order;
@@ -16,6 +18,9 @@ public class OrderService {
 
     @Autowired
     private RestaurantIntegration restaurantIntegration;
+
+    @Autowired
+    private CustomerIntegration customerIntegration;
     public Long placeOrder(Order order) {
         PriceInfo priceInfo = restaurantIntegration.calculateOrder(order);
         order.setTotalPrice(order.getTotalPrice());
@@ -45,6 +50,8 @@ public class OrderService {
 
     }
     public Long placeOrder3(Order order) {
+        CustomerRest customer = customerIntegration.getCustomerByNumber(order.getCustomerNumber());
+        System.out.println(customer);
         PriceInfo priceInfo = restaurantIntegration.calculateOrder3(order);
         order.setTotalPrice(order.getTotalPrice());
         System.out.println(priceInfo.getDesc());

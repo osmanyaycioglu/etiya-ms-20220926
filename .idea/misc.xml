@@ -12,6 +12,9 @@
         <option value="$PROJECT_DIR$/ms-customer/pom.xml" />
         <option value="$PROJECT_DIR$/lib-rest-error/pom.xml" />
         <option value="$PROJECT_DIR$/ms-restaurant/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-customer-api/pom.xml" />
+        <option value="$PROJECT_DIR$/api-restaurant/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-notification/pom.xml" />
       </list>
     </option>
   </component>
